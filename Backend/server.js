@@ -17,7 +17,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname, '..', 'Frontend')));
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'Frontend', 'pages', 'index.html'));
+});
 app.get('/api/health', async (req, res) => {
   try {
     const result = await pool.query('SELECT NOW()');
