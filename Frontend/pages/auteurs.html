@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Auteurs - Bibliothèque</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <span class="navbar-marque">As Bibliothèque</span>
+        <div class="navbar-liens">
+            <a href="index.html">Accueil</a>
+            <a href="livres.html">Livres</a>
+            <a href="adherents.html" id="lienAdherents">Adhérents</a>
+            <a href="emprunts.html">Emprunts</a>
+        </div>
+        <div class="navbar-utilisateur">
+            <span id="nomUtilisateur"></span>
+            <button onclick="deconnexion()">Déconnexion</button>
+        </div>
+    </nav>
+
+    <main class="section-page">
+        <h1>Auteurs</h1>
+
+        <form id="formAjoutAuteur" class="formulaire-inline" onsubmit="return false;">
+            <input type="text" id="nom" placeholder="Nom" required>
+            <input type="text" id="prenom" placeholder="Prénom" required>
+            <input type="text" id="nationalite" placeholder="Nationalité (optionnel)">
+            <button type="submit">Ajouter</button>
+        </form>
+        <p id="messageAuteur"></p>
+
+        <table class="tableau-donnees">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Nationalité</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="corpsTableauAuteurs">
+                <tr><td colspan="4">Chargement...</td></tr>
+            </tbody>
+        </table>
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth-guard.js"></script>
+    <script src="../js/auteurs.js"></script>
+</body>
+</html>

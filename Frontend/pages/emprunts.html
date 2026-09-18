@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Emprunts - Bibliothèque</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <span class="navbar-marque">As Bibliothèque</span>
+        <div class="navbar-liens">
+            <a href="index.html">Accueil</a>
+            <a href="livres.html">Livres</a>
+            <a href="auteurs.html">Auteurs</a>
+            <a href="adherents.html" id="lienAdherents">Adhérents</a>
+       <a href="statistique.html" id="lienStatistiques">Statistiques</a>
+        </div>
+        <div class="navbar-utilisateur">
+            <span id="nomUtilisateur"></span>
+            <button onclick="deconnexion()">Déconnexion</button>
+        </div>
+    </nav>
+
+    <main class="section-page">
+        <h1>Emprunts</h1>
+
+        <form id="formNouvelEmprunt" class="formulaire-inline" onsubmit="return false;">
+            <select id="livre_id" required>
+                <option value="">Choisir un livre disponible...</option>
+            </select>
+            <select id="adherent_id" required>
+                <option value="">Choisir un adhérent...</option>
+            </select>
+            <input type="date" id="date_retour_prevue" required>
+            <button type="submit">Enregistrer l'emprunt</button>
+        </form>
+        <p id="messageEmprunt"></p>
+
+        <div class="filtres-emprunts">
+            <button onclick="filtrerEmprunts('tous')" class="filtre-actif" id="filtreTous">Tous</button>
+            <button onclick="filtrerEmprunts('en_cours')" id="filtreEnCours">En cours</button>
+            <button onclick="filtrerEmprunts('en_retard')" id="filtreEnRetard">En retard</button>
+        </div>
+
+        <table class="tableau-donnees">
+            <thead>
+                <tr>
+                    <th>Livre</th>
+                    <th>Adhérent</th>
+                    <th>Date d'emprunt</th>
+                    <th>Retour prévu</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="corpsTableauEmprunts">
+                <tr><td colspan="6">Chargement...</td></tr>
+            </tbody>
+        </table>
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth-guard.js"></script>
+    <script src="../js/emprunts.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Livres - Bibliothèque</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <span class="navbar-marque">As Bibliothèque</span>
+        <div class="navbar-liens">
+            <a href="index.html">Accueil</a>
+            <a href="auteurs.html">Auteurs</a>
+            <a href="adherents.html" id="lienAdherents">Adhérents</a>
+            <a href="emprunts.html">Emprunts</a>
+        </div>
+        <div class="navbar-utilisateur">
+            <span id="nomUtilisateur"></span>
+            <button onclick="deconnexion()">Déconnexion</button>
+        </div>
+    </nav>
+
+    <main class="section-page">
+        <h1>Livres</h1>
+
+        <form id="formAjoutLivre" class="formulaire-inline" onsubmit="return false;">
+            <input type="text" id="titre" placeholder="Titre" required>
+            <select id="auteur_id" required>
+                <option value="">Choisir un auteur...</option>
+            </select>
+            <input type="number" id="annee_publication" placeholder="Année">
+             <input type="file" id="fichier_pdf" accept="application/pdf">
+            <button type="submit">Ajouter</button>
+        </form>
+        <p id="messageLivre"></p>
+
+        <div class="barre-recherche">
+            <input type="text" id="rechercheTitre" placeholder="Rechercher par titre...">
+            <input type="text" id="rechercheAuteur" placeholder="Rechercher par auteur...">
+            <button onclick="reinitialiserRecherche()">Réinitialiser</button>
+        </div>
+
+        <table class="tableau-donnees">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Auteur</th>
+                    <th>Année</th>
+                    <th>Statut</th>
+                    <th>PDF</th>
+                    <th id="colActions">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="corpsTableauLivres">
+                <tr><td colspan="5">Chargement...</td></tr>
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            <button id="pagePrecedente" onclick="changerPage(-1)">← Précédent</button>
+            <span id="infoPagination"></span>
+            <button id="pageSuivante" onclick="changerPage(1)">Suivant →</button>
+        </div>
+
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth-guard.js"></script>
+    <script src="../js/livres.js"></script>
+</body>
+</html>
