@@ -67,16 +67,12 @@ async function chargerLivres() {
         }
 
         data.livres.forEach(livre => {
-            const pdfUrl = livre.fichier_pdf ? `${API_URL}/uploads/${encodeURIComponent(livre.fichier_pdf)}` : null;
             const ligne = document.createElement('tr');
             ligne.innerHTML = `
                 <td>${livre.titre}</td>
                 <td>${livre.auteur_prenom} ${livre.auteur_nom}</td>
                 <td>${livre.annee_publication || '—'}</td>
                 <td><span class="statut-${livre.statut}">${livre.statut === 'disponible' ? 'Disponible' : 'Emprunté'}</span></td>
-                <td>
-                    ${pdfUrl ? `<a href="${pdfUrl}" target="_blank" rel="noopener noreferrer">Ouvrir PDF</a>` : '—'}
-                </td>
                 <td>
                     ${utilisateur.role === 'personnel' ? `
                         <button onclick="modifierLivre(${livre.id}, '${livre.titre.replace(/'/g, "\\'")}', ${livre.auteur_id}, ${livre.annee_publication || 'null'})">Modifier</button>
@@ -110,20 +106,14 @@ document.getElementById('formAjoutLivre').addEventListener('submit', async (e) =
     const titre = document.getElementById('titre').value;
     const auteur_id = document.getElementById('auteur_id').value;
     const annee_publication = document.getElementById('annee_publication').value;
-    const fichierPdf = document.getElementById('fichier_pdf').files[0];
-
     try {
-        const formData = new FormData();
-        formData.append('titre', titre);
-        formData.append('auteur_id', auteur_id);
-        formData.append('annee_publication', annee_publication || '');
-        if (fichierPdf) {
-            formData.append('fichier_pdf', fichierPdf);
-        }
-
         await apiFetch('/livres', {
             method: 'POST',
-            body: formData
+            body: JSON.stringify({
+                titre,
+                auteur_id,
+                annee_publication: annee_publication || null
+            })
         });
 
         document.getElementById('formAjoutLivre').reset();

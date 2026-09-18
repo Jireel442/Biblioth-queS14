@@ -22,7 +22,7 @@ async function getAllLivres(req, res, next) {
         const offset = (page - 1) * limit;
 
         const requeteLivres = `
-            SELECT livres.id, livres.titre, livres.annee_publication, livres.statut, livres.auteur_id, livres.fichier_pdf,
+            SELECT livres.id, livres.titre, livres.annee_publication, livres.statut, livres.auteur_id,
                    auteurs.nom AS auteur_nom, auteurs.prenom AS auteur_prenom
             FROM livres
             JOIN auteurs ON livres.auteur_id = auteurs.id
@@ -62,12 +62,10 @@ async function createLivre(req, res, next) {
             return res.status(400).json({ erreur: "Le titre et l'auteur sont requis." });
         }
 
-        const fichierPdf = req.file ? req.file.filename : null;
-
         const result = await pool.query(
-            `INSERT INTO livres (titre, auteur_id, annee_publication, fichier_pdf)
-             VALUES ($1, $2, $3, $4) RETURNING *`,
-            [titre, auteur_id, annee_publication || null, fichierPdf]
+            `INSERT INTO livres (titre, auteur_id, annee_publication)
+             VALUES ($1, $2, $3) RETURNING *`,
+            [titre, auteur_id, annee_publication || null]
         );
         res.status(201).json(result.rows[0]);
     } catch (err) {

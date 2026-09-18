@@ -46,4 +46,3 @@ CREATE INDEX idx_emprunts_livre ON emprunts(livre_id);
 CREATE INDEX idx_emprunts_adherent ON emprunts(adherent_id);
 CREATE INDEX idx_livres_titre ON livres(titre);
 CREATE INDEX idx_utilisateurs_email ON utilisateurs(email);
-ALTER TABLE livres ADD COLUMN fichier_pdf VARCHAR(255);
