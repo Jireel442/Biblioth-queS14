@@ -41,7 +41,7 @@ app.use('/statistiques', statistiquesRoutes);
 
 app.use(errorHandler); // toujours en dernier, après toutes les routes
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Serveur démarré sur http://localhost:${PORT}`);
 });
